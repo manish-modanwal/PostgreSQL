@@ -1,4 +1,8 @@
-import { Client } from 'pg';
+import { Client } from 'pg'; 
+import express from "express";
+import { isNewExpression } from 'typescript';
+
+const app=express();
 
 const pgClient = new Client({
   host: "ep-lucky-cloud-ab0xy61z-pooler.eu-west-2.aws.neon.tech",
@@ -19,3 +23,16 @@ async function main() {
 }
 
 main(); 
+
+
+
+app.post('/signup' ,async(req ,res)=>{
+
+const username=req.body.username;
+const password = req.body.password;
+const email= req.body.email;
+
+const response = await pgClient.query(`INSERT INTO users (username,email ,password ,)
+VALUES (${username},${email} ,${password} )`);
+
+})
